@@ -4,3 +4,18 @@ if [ $1 == "test" ]
 then
     exec python -m unittest /home/aymeric/Documents/Imagees/tests/test_unit.py
 fi
+
+if [ $1 == "encode" ]
+then
+  exec /home/aymeric/Documents/Imagees/venv/bin/python /home/aymeric/Documents/Imagees/src/Encoder/Encoder.py
+fi
+
+if [ $1 == "decode" ]
+then
+  exec /home/aymeric/Documents/Imagees/venv/bin/python /home/aymeric/Documents/Imagees/src/Decoder/Decoder.py
+fi
+
+if [ $1 == "-h" ]
+then
+  echo "Please use [test, encode, decode, -h]"
+fi

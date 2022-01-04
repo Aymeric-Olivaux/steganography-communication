@@ -29,3 +29,29 @@ class Encoder:
 
             new_image = Image.fromarray(array)
             return new_image
+
+    @staticmethod
+    def run_encode():
+        print("What type of file you want to encode?\n('text', 'image', 'pdf', '.txt'")
+        argument = input('>')
+
+        if argument == 'text':
+            print("What is the text?")
+            text = input()
+            image_to_encode_name = "color.png"
+            encoded_image = Encoder.encode_msg(text, image_to_encode_name)
+            path_to_save = "/home/aymeric/Documents/Imagees/resources/results/pub_im1.png"
+            encoded_image.save(path_to_save)
+            print("Your encoded image have been saved into " + path_to_save)
+            return
+        elif argument == 'image':
+            raise Exception("Image are not yet implemented")
+        elif argument == 'pdf':
+            raise Exception("Pdf are not yet implemented")
+        elif argument == '.txt':
+            raise Exception(".txt are not yet implemented")
+        return
+
+
+if __name__ == '__main__':
+    Encoder.run_encode()
