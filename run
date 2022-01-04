@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ $1 == "test" ]
+then
+    exec python -m unittest /home/aymeric/Documents/Imagees/tests/test_unit.py
+fi
