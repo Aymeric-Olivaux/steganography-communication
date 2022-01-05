@@ -6,7 +6,7 @@ from src.Utils.utils import *
 
 class Encoder:
     @staticmethod
-    def encode_msg(msg, image_name):
+    def encode_msg(msg, image_name, type):
         """
         Encode a msg(string) into a image define by image_name (place the image into resources folder
         :param msg: a string like "Hello World!"
@@ -14,7 +14,7 @@ class Encoder:
         :return: The new image
         """
         string_byte = concatenate_binary_to_string(string_to_binary(msg))
-
+        string_byte = Encoder.type_word(type=type) + string_byte
         with Image.open(PATH_TO_RESOURCES + "original/" + image_name) as im:
             array = np.array(im)
             jump = 0
@@ -30,6 +30,18 @@ class Encoder:
             return new_image
 
     @staticmethod
+    def type_word(type):
+        if type == 1: # text
+            return "00000001"
+        if type == 2: # image
+            return "00000002"
+        if type == 3: # pdf
+            return "00000003"
+        if type == 4: # .txt
+            return "00000004"
+        return "00000000"
+
+    @staticmethod
     def run_encode():
         print("What type of file you want to encode?\n('text', 'image', 'pdf', '.txt'")
         argument = input('>')
@@ -38,7 +50,7 @@ class Encoder:
             print("What is the text?")
             text = input()
             image_to_encode_name = "color.png"
-            encoded_image = Encoder.encode_msg(text, image_to_encode_name)
+            encoded_image = Encoder.encode_msg(text, image_to_encode_name, type=1)
             path_to_save = PATH_TO_RESOURCES + "results/pub_" + image_to_encode_name
             encoded_image.save(path_to_save)
             print("Your encoded image have been saved into " + path_to_save)

@@ -38,17 +38,52 @@ class Decoder:
 
             if is_end == 8:
                 break
+        result_bin_str = result_bin_str[8:] # Cur the first word for type
         list_bin = separate_string_to_binary(result_bin_str)
         msg = binary_to_string(list_bin)
         return msg
+
+    @staticmethod
+    def get_type(pub_image_name, private_image_name):
+
+        with Image.open(PATH_TO_RESOURCES + "original/" + private_image_name) as im:
+            private_array = np.array(im)
+
+        with Image.open(PATH_TO_RESOURCES + "results/" + pub_image_name) as im:
+            pub_array = np.array(im)
+        if len(pub_array) != len(private_array) or len(pub_array[0]) != len(private_array[0]):
+            raise Exception("Images should at least be equal in lengths")
+
+        result_bin_str = ""
+        is_end = 0
+        for j in range(len(pub_array)):
+            for i in range(len(pub_array[0])):
+                result_int = int(pub_array[j][i][0]) - int(private_array[j][i][0])
+                result_bin_str += str(result_int)
+
+                is_end += 1
+                if is_end == 8:
+                    break
+            if is_end == 8:
+                break
+        i = int(result_bin_str)
+
+        if i == 1: # text
+            return 'text'
+        if i == 2: # image
+            return 'image'
+        if i == 3: # pdf
+            return 'pdf'
+        if i == 4: # .txt
+            return '.txt'
+        raise Exception("Unknown type")
 
     @staticmethod
     def run_decode():
         print("What if the name of the original image?")
         original_name = input('>')
         encoded_name = "pub_" + original_name
-        print("What is the type of the file? ('text', 'image', 'pdf', '.txt')")
-        type_name = input('>')
+        type_name = Decoder.get_type(pub_image_name=encoded_name, private_image_name=original_name)
         if type_name != "text" and type_name != "image" and type_name != "pdf" and type_name != ".txt":
             raise Exception("Bad type")
         if type_name != 'text':
