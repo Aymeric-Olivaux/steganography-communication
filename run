@@ -1,18 +1,20 @@
 #!/bin/sh
 
+echo $PWD
+
 if [ $1 == "test" ]
 then
-    exec python -m unittest /home/aymeric/Documents/Imagees/tests/test_unit.py
+    exec python -m unittest tests/test_unit.py
 fi
 
 if [ $1 == "encode" ]
 then
-  exec /home/aymeric/Documents/Imagees/venv/bin/python /home/aymeric/Documents/Imagees/src/Encoder/Encoder.py
+  exec venv/bin/python src/Encoder/Encoder.py
 fi
 
 if [ $1 == "decode" ]
 then
-  exec /home/aymeric/Documents/Imagees/venv/bin/python /home/aymeric/Documents/Imagees/src/Decoder/Decoder.py
+  exec venv/bin/python src/Decoder/Decoder.py
 fi
 
 if [ $1 == "-h" ]

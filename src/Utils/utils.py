@@ -1,4 +1,5 @@
-from bitstring import BitArray
+import os
+
 
 def string_to_binary(a):
     """
@@ -66,6 +67,7 @@ def separate_string_to_binary(result_string):
 
     return result_list
 
+
 def pdf_to_binary(name_pdf):
     """
     This function transform a pdf into a list of binary
@@ -74,15 +76,23 @@ def pdf_to_binary(name_pdf):
     :return: A list of binary(int) like : [1001000, ... , 100001]
     """
     lines = []
-    with open("/home/aymeric/Documents/Imagees/resources/data/" + name_pdf, 'rb') as file:
+    with open(PATH_TO_RESOURCES + "data/" + name_pdf, 'rb') as file:
         for line in file.readlines():
             lines.append(line)
 
-
-
-
-    path = "/home/aymeric/Documents/Imagees/resources/results/"
+    path = PATH_TO_RESOURCES + "results/"
     file = open(path + "new.pdf", 'wb')
     for line in lines:
         file.write(line)
     file.close()
+
+
+def get_path_to_resources():
+    path = os.path.abspath(__file__)
+    index = path.index("Imagees")
+    result = path[:index]
+    result = result + "Imagees/resources/"
+    return result
+
+
+PATH_TO_RESOURCES = get_path_to_resources()

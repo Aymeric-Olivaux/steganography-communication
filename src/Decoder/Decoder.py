@@ -14,10 +14,10 @@ class Decoder:
         :return msg: The famous message
         """
 
-        with Image.open("/home/aymeric/Documents/Imagees/resources/original/" + private_image_name) as im:
+        with Image.open(PATH_TO_RESOURCES + "original/" + private_image_name) as im:
             private_array = np.array(im)
 
-        with Image.open("/home/aymeric/Documents/Imagees/resources/results/" + pub_image_name) as im:
+        with Image.open(PATH_TO_RESOURCES + "results/" + pub_image_name) as im:
             pub_array = np.array(im)
 
         if len(pub_array) != len(private_array) or len(pub_array[0]) != len(private_array[0]):
