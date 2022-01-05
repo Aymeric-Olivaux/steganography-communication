@@ -14,7 +14,7 @@ class Decoder:
         :return msg: The famous message
         """
 
-        with Image.open("/home/aymeric/Documents/Imagees/resources/" + private_image_name) as im:
+        with Image.open("/home/aymeric/Documents/Imagees/resources/original/" + private_image_name) as im:
             private_array = np.array(im)
 
         with Image.open("/home/aymeric/Documents/Imagees/resources/results/" + pub_image_name) as im:
@@ -40,5 +40,23 @@ class Decoder:
                 break
         list_bin = separate_string_to_binary(result_bin_str)
         msg = binary_to_string(list_bin)
-        print("msg: " + msg)
         return msg
+
+    @staticmethod
+    def run_decode():
+        print("What if the name of the original image?")
+        original_name = input('>')
+        encoded_name = "pub_" + original_name
+        print("What is the type of the file? ('text', 'image', 'pdf', '.txt')")
+        type_name = input('>')
+        if type_name != "text" and type_name != "image" and type_name != "pdf" and type_name != ".txt":
+            raise Exception("Bad type")
+        if type_name != 'text':
+            raise Exception("Type not yet implemented")
+        message = Decoder.decode_msg(encoded_name, original_name)
+
+        print("The final message is:\n===============\n" + message + "\n===============")
+
+
+if __name__ == '__main__':
+    Decoder.run_decode()

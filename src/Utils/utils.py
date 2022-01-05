@@ -1,3 +1,4 @@
+from bitstring import BitArray
 
 def string_to_binary(a):
     """
@@ -52,7 +53,7 @@ def separate_string_to_binary(result_string):
     """
     Transform a single string to a list of binary
     :param result_string: A string like "1001000...100001"
-    :return: A list of binary(int) like : [1001000, ... , 100001
+    :return: A list of binary(int) like : [1001000, ... , 100001]
     """
     if len(result_string) % 8 != 0:
         result_string = result_string[:(len(result_string) // 8) * 8]
@@ -64,3 +65,24 @@ def separate_string_to_binary(result_string):
         result_list.append(element)
 
     return result_list
+
+def pdf_to_binary(name_pdf):
+    """
+    This function transform a pdf into a list of binary
+    The pdf have to be save in resources/data
+    :param name_pdf:
+    :return: A list of binary(int) like : [1001000, ... , 100001]
+    """
+    lines = []
+    with open("/home/aymeric/Documents/Imagees/resources/data/" + name_pdf, 'rb') as file:
+        for line in file.readlines():
+            lines.append(line)
+
+
+
+
+    path = "/home/aymeric/Documents/Imagees/resources/results/"
+    file = open(path + "new.pdf", 'wb')
+    for line in lines:
+        file.write(line)
+    file.close()

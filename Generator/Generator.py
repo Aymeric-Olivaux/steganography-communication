@@ -3,9 +3,11 @@ import random
 from PIL import Image
 import numpy as np
 
+
 class Generator:
 
-    def generate(self, x: int, y: int, rgb: bool = False):
+    @staticmethod
+    def generate(x: int, y: int, rgb: bool = False):
         if rgb:
             new_image = Image.new('RGB', (x, y))
         else:

@@ -74,7 +74,7 @@ class TestUnit(unittest.TestCase):
         self.assertEqual(separate_string_to_binary(test), expected)
 
     def test_image_to_array_to_image_to_array(self):
-        with Image.open("/home/aymeric/Documents/Imagees/resources/color.png") as im:
+        with Image.open("/resources/original/color.png") as im:
             array_1 = np.array(im)
 
         new_image = Image.fromarray(array_1)
